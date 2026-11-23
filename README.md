@@ -1,32 +1,120 @@
-# Connect Liberdade — gestão de coworking (projeto de portfólio)
+# 🚀 NEXUS WORKSPACE
 
-Sistema web para gerir clientes, planos, contratos e cobranças de um coworking, substituindo planilhas por um banco relacional.
-Inspirado em um caso real de negócio; **todos os dados de demonstração são fictícios** (`python -m app.seed`).
+### Sistema Web de Gestão Administrativa
 
-## O que já funciona
-- Cadastro de clientes PF/PJ com **validação de CPF/CNPJ** e bloqueio de duplicidade
-- Planos e contratos; geração automática de cobranças mensais (sem duplicar vencimentos)
-- **Baixa de cobrança só com ID de transação confirmado e valor exato**; transação repetida é recusada
-- Inadimplência calculada a partir do vencimento
-- Dashboard com indicadores calculados direto do banco; exportação de clientes em CSV
-- Testes automatizados (`pytest`)
+O **Nexus Workspace** é um projeto de aplicação web desenvolvido para explorar a organização e a centralização de processos administrativos em uma única plataforma.
 
-## Stack
-Python · FastAPI · SQLAlchemy · PostgreSQL (SQLite em dev) · HTML/CSS/JS · Docker Compose
+O projeto reúne conceitos de desenvolvimento back-end, interface web, persistência de dados e organização de sistemas.
 
-## Como rodar
+## 🎯 Objetivo
+
+Desenvolver uma solução web que facilite o gerenciamento de informações administrativas, oferecendo uma interface organizada e uma estrutura preparada para evolução e implementação de novas funcionalidades.
+
+## 🛠️ Tecnologias utilizadas
+
+- 🐍 **Python** — Desenvolvimento back-end.
+- ⚡ **FastAPI** — Construção da API.
+- 🌐 **HTML** — Estrutura da interface.
+- 🎨 **CSS** — Estilização da aplicação.
+- 💻 **JavaScript** — Interatividade.
+- 🗄️ **SQLite** — Banco de dados utilizado no desenvolvimento.
+- 🐳 **Docker** — Configuração de ambiente em contêineres.
+- 🧪 **Pytest** — Estrutura de testes automatizados.
+
+## 📂 Estrutura do projeto
+
+```text
+nexusAPP/
+├── app/
+│   ├── static/
+│   │   └── index.html
+│   ├── main.py
+│   ├── db.py
+│   ├── models.py
+│   ├── seed.py
+│   ├── validators.py
+│   └── atualizar_precos.py
+├── tests/
+│   └── test_app.py
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+```
+
+## 💡 Funcionalidades e conceitos
+
+O projeto foi estruturado para trabalhar com:
+
+- Organização de informações administrativas.
+- Interface web para interação com o sistema.
+- API para comunicação entre os componentes.
+- Persistência e manipulação de dados.
+- Validação de informações.
+- Estrutura de testes e execução em contêineres.
+
+*As funcionalidades estão sujeitas à implementação e evolução do projeto.*
+
+## ⚙️ Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/jptragino-dev/nexus-workspace.git
+```
+
+Acesse a pasta:
+
+```bash
+cd nexus-workspace
+```
+
+Crie e ative um ambiente virtual:
+
+```bash
+python -m venv .venv
+```
+
+No Windows:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Instale as dependências:
+
 ```bash
 pip install -r requirements.txt
-python -m app.seed            # opcional: dados fictícios
-uvicorn app.main:app --reload # http://localhost:8000  (docs da API em /docs)
-pytest
 ```
-Com Postgres: `docker compose up --build`
 
-## Decisões de projeto
-- Valores monetários em `Numeric`, nunca `float` no banco
-- Unicidade (`document`, `transaction_id`, `contract+due_date`) garantida por constraints, não só por código
-- Integrações bancárias (PIX/boleto/webhook) ficam de fora de propósito: exigem contrato e credenciais. Próximo passo: camada de "adaptadores" por banco
+A inicialização da aplicação deve seguir a configuração definida em `app/main.py` ou `docker-compose.yml`.
 
-## Roadmap
-Login e perfis · Alembic · importação de Excel/OFX · conciliação bancária · contas a pagar · notificações (e-mail/WhatsApp) · automações com n8n · relatórios em PDF/Excel · React/Next.js
+## 📸 Demonstração
+
+Espaço reservado para imagens da interface do Nexus Workspace.
+
+*Dashboard e demais telas poderão ser adicionados futuramente.*
+
+## 🔒 Dados de demonstração
+
+O projeto é destinado a fins educacionais e de portfólio. Os dados de demonstração devem ser fictícios, sem informações confidenciais de pessoas ou empresas.
+
+## 📈 Próximas melhorias
+
+- Aprimoramento da interface.
+- Expansão das funcionalidades administrativas.
+- Melhoria das validações.
+- Ampliação dos testes automatizados.
+- Evolução da documentação técnica.
+
+## 👨‍💻 Desenvolvedor
+
+**João Pedro Moreira da Silva Tragino**
+
+Estudante de Análise e Desenvolvimento de Sistemas (ADS).
+
+GitHub: [@jptragino-dev](https://github.com/jptragino-dev)
+
+---
+
+⭐ Projeto desenvolvido para aprendizado, prática e evolução profissional em desenvolvimento de software.
