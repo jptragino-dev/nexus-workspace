@@ -1,0 +1,940 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXUS WORKSPACE | Gestão</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+
+<style>
+:root {
+    --ink: #172b4d;
+    --mute: #64748b;
+    --paper: #f1f5f9;
+    --card: #ffffff;
+    --line: #e2e8f0;
+    --brand: #2563eb;
+    --brand-hover: #1d4ed8;
+    --bad: #dc2626;
+    --ok: #16a34a;
+    --sand: #d97706;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font: 14px/1.6 Manrope, system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+/* MENU LATERAL */
+
+nav {
+    background: #152b4a;
+    color: #ffffff;
+    padding: 30px 18px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: 3px solid var(--brand);
+}
+
+nav h1 {
+    font-size: 19px;
+    margin: 0 0 4px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+}
+
+nav small {
+    color: #93c5fd;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+nav button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: #dbeafe;
+    padding: 13px 15px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: .2s;
+}
+
+nav button:first-of-type {
+    margin-top: 40px;
+}
+
+nav button:hover {
+    background: #24456e;
+    color: #ffffff;
+}
+
+nav button[aria-current="true"] {
+    background: var(--brand);
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* CONTEÚDO */
+
+main {
+    padding: 38px;
+    width: 100%;
+    min-width: 0;
+    max-width: 1500px;
+}
+
+h2 {
+    font-size: 27px;
+    margin: 0 0 25px;
+    font-weight: 800;
+    letter-spacing: -.6px;
+}
+
+h3 {
+    font-weight: 800;
+}
+
+/* DASHBOARD */
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.kpi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.03);
+}
+
+.kpi span {
+    color: var(--mute);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.kpi b {
+    display: block;
+    font-size: 25px;
+    margin-top: 8px;
+    font-weight: 800;
+}
+
+.kpi.hero {
+    background: var(--brand);
+    color: #ffffff;
+    border-color: var(--brand);
+}
+
+.kpi.hero span {
+    color: #dbeafe;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+}
+
+/* PAINÉIS */
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+    overflow-x: auto;
+    box-shadow: 0 3px 12px rgba(0,0,0,.03);
+}
+
+.panel h3 {
+    margin: 0 0 18px;
+    font-size: 16px;
+}
+
+/* TABELAS */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+
+th {
+    color: var(--mute);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* STATUS */
+
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    background: #f5f5f5;
+}
+
+.paid, .active {
+    color: var(--ok);
+    background: #e9f7ee;
+}
+
+.overdue, .off, .cancelled {
+    color: var(--bad);
+    background: #feecec;
+}
+
+.pending {
+    color: var(--sand);
+    background: #fff5dd;
+}
+
+/* GRÁFICOS */
+
+.bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 180px;
+}
+
+.bars div {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: var(--mute);
+}
+
+.bars i {
+    display: block;
+    background: linear-gradient(180deg, #60a5fa, #2563eb);
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 5px;
+}
+
+/* BOTÕES */
+
+.btn {
+    display: inline-block;
+    background: var(--brand);
+    color: #ffffff;
+    border: 1px solid var(--brand);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--brand-hover);
+    border-color: var(--brand-hover);
+}
+
+.btn.ghost {
+    background: #ffffff;
+    color: var(--brand);
+    border: 1px solid #bfdbfe;
+}
+
+.btn.ghost:hover {
+    background: #eff6ff;
+}
+
+/* FORMULÁRIOS */
+
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    align-items: end;
+}
+
+label {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 700;
+    display: grid;
+    gap: 6px;
+}
+
+input, select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--ink);
+    font: inherit;
+    min-height: 44px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid rgba(37,99,235,.2);
+    border-color: var(--brand);
+}
+
+nav button:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+#msg {
+    min-height: 22px;
+    font-weight: 700;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.empty {
+    color: var(--mute);
+    padding: 14px 0;
+}
+
+.demo-note {
+    padding: 10px 14px;
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        position: static;
+        height: auto;
+        padding: 18px;
+    }
+
+    nav button {
+        display: inline-block;
+        width: auto;
+        margin-top: 12px;
+    }
+
+    nav button:first-of-type {
+        margin-top: 12px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    h2 {
+        font-size: 23px;
+    }
+
+    .panel {
+        padding: 15px;
+    }
+
+    .kpis {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h1>NEXUS WORKSPACE</h1>
+    <small>PLATAFORMA DE GESTÃO</small>
+
+    <button data-v="dash" aria-current="true">
+        Dashboard
+    </button>
+
+    <button data-v="clients">
+        Clientes
+    </button>
+
+    <button data-v="charges">
+        Cobranças
+    </button>
+</nav>
+
+<main>
+    <div class="demo-note">
+        Projeto demonstrativo em desenvolvimento.
+        Utilize exclusivamente dados fictícios.
+    </div>
+
+    <p id="msg" role="status"></p>
+    <div id="view"></div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+
+const brl = v => Number(v).toLocaleString(
+    'pt-BR',
+    {
+        style: 'currency',
+        currency: 'BRL'
+    }
+);
+
+const esc = s => String(s ?? '').replace(
+    /[&<>"']/g,
+    c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[c])
+);
+
+const dt = s => String(s || '').split('-').reverse().join('/');
+
+const fmtDoc = d => {
+    d = String(d || '');
+
+    return d.length === 11
+        ? d.replace(
+            /(\d{3})(\d{3})(\d{3})(\d{3})(\d{2})/,
+            '$1.$2.$3-$4'
+        )
+        : d.replace(
+            /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+            '$1.$2.$3/$4-$5'
+        );
+};
+
+const label = {
+    paid: 'Paga',
+    pending: 'Pendente',
+    overdue: 'Atrasada',
+    cancelled: 'Cancelada'
+};
+
+async function api(p, o) {
+    const r = await fetch(p, o);
+    const j = await r.json().catch(() => ({}));
+
+    if (!r.ok) {
+        throw new Error(
+            typeof j.detail === 'string'
+                ? j.detail
+                : 'Verifique os dados informados'
+        );
+    }
+
+    return j;
+}
+
+function say(t, bad = false) {
+    const m = $('#msg');
+    m.textContent = t;
+    m.style.color = bad
+        ? 'var(--bad)'
+        : 'var(--ok)';
+}
+
+/* DASHBOARD */
+
+async function dash() {
+    const d = await api('/dashboard');
+    const c = d.clients;
+
+    const max = Math.max(
+        1,
+        ...d.monthly_revenue.map(m => m.value)
+    );
+
+    if (!c.total) {
+        $('#view').innerHTML = `
+            <h2>Dashboard</h2>
+            <p class="empty">
+                Ainda não há dados cadastrados.
+            </p>
+        `;
+        return;
+    }
+
+    $('#view').innerHTML = `
+        <h2>Dashboard</h2>
+
+        <div class="kpis">
+
+            <div class="kpi hero">
+                <span>Recebido no mês</span>
+                <b>${brl(d.received_month)}</b>
+            </div>
+
+            <div class="kpi">
+                <span>Clientes ativos</span>
+                <b>
+                    ${c.active}
+                    <small style="font-size:13px;color:var(--mute)">
+                        de ${c.total}
+                    </small>
+                </b>
+            </div>
+
+            <div class="kpi">
+                <span>A receber</span>
+                <b>${brl(d.pending_total)}</b>
+            </div>
+
+            <div class="kpi">
+                <span>Em atraso</span>
+                <b style="color:var(--bad)">
+                    ${brl(d.overdue_total)}
+                </b>
+            </div>
+
+            <div class="kpi">
+                <span>Clientes inadimplentes</span>
+                <b>${c.delinquent}</b>
+            </div>
+
+        </div>
+
+        <div class="grid2">
+
+            <div class="panel">
+                <h3>Receita recebida por mês</h3>
+
+                ${
+                    d.monthly_revenue.length
+                        ? `
+                            <div class="bars">
+                                ${
+                                    d.monthly_revenue.map(m => `
+                                        <div>
+                                            <i
+                                                style="height:${m.value / max * 140}px"
+                                                title="${brl(m.value)}"
+                                            ></i>
+                                            ${m.month.slice(5)}/${m.month.slice(2,4)}
+                                        </div>
+                                    `).join('')
+                                }
+                            </div>
+                        `
+                        : '<p class="empty">Nenhum pagamento registrado.</p>'
+                }
+            </div>
+
+            <div class="panel">
+                <h3>Contratos ativos por plano</h3>
+
+                ${
+                    d.clients_by_plan.map(p => `
+                        <p style="margin:6px 0">
+                            <b>${p.count}</b>
+                            · ${esc(p.plan)}
+                        </p>
+                    `).join('')
+                    || '<p class="empty">Sem contratos.</p>'
+                }
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <h3>Próximos vencimentos</h3>
+
+            <table>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                </tr>
+
+                ${
+                    d.upcoming.map(u => `
+                        <tr>
+                            <td>${esc(u.client)}</td>
+                            <td>${dt(u.due_date)}</td>
+                            <td>${brl(u.amount)}</td>
+                        </tr>
+                    `).join('')
+                    || `
+                        <tr>
+                            <td colspan="3" class="empty">
+                                Nenhuma cobrança pendente.
+                            </td>
+                        </tr>
+                    `
+                }
+            </table>
+        </div>
+    `;
+}
+
+/* CLIENTES */
+
+async function clients(q = '') {
+    const [list, plans] = await Promise.all([
+        api('/clients?q=' + encodeURIComponent(q)),
+        api('/plans')
+    ]);
+
+    $('#view').innerHTML = `
+        <h2>Clientes</h2>
+
+        <div class="panel">
+            <h3>Novo cliente</h3>
+
+            <form id="f">
+
+                <label>
+                    Tipo
+                    <select name="person_type">
+                        <option value="PF">Pessoa física</option>
+                        <option value="PJ">Pessoa jurídica</option>
+                    </select>
+                </label>
+
+                <label>
+                    Nome / razão social
+                    <input name="name" required minlength="2">
+                </label>
+
+                <label>
+                    CPF ou CNPJ
+                    <input name="document" required>
+                </label>
+
+                <label>
+                    E-mail
+                    <input name="email" type="email">
+                </label>
+
+                <label>
+                    Plano
+                    <select name="plan_id">
+                        <option value="">Sem contrato</option>
+                        ${
+                            plans.map(p => `
+                                <option value="${p.id}">
+                                    ${esc(p.name)} · ${brl(p.price)}
+                                </option>
+                            `).join('')
+                        }
+                    </select>
+                </label>
+
+                <button class="btn">
+                    Cadastrar cliente
+                </button>
+
+            </form>
+        </div>
+
+        <div class="row">
+
+            <input
+                id="q"
+                placeholder="Buscar por nome"
+                value="${esc(q)}"
+                style="flex:1;min-width:200px"
+            >
+
+        </div>
+
+        <div class="panel">
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Plano</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+
+                ${
+                    list.map(c => `
+                        <tr>
+                            <td>${esc(c.name)}</td>
+                            <td>${esc(c.plan || '—')}</td>
+
+                            <td>
+                                <span class="tag ${c.active ? 'active' : 'off'}">
+                                    ${c.active ? 'Ativo' : 'Inativo'}
+                                </span>
+
+                                ${
+                                    c.overdue_charges
+                                        ? `
+                                            <span class="tag overdue">
+                                                ${c.overdue_charges} em atraso
+                                            </span>
+                                        `
+                                        : ''
+                                }
+                            </td>
+
+                            <td>
+                                <button
+                                    class="btn ghost"
+                                    data-t="${c.id}"
+                                    data-a="${c.active}"
+                                >
+                                    ${c.active ? 'Inativar' : 'Reativar'}
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('')
+                    || `
+                        <tr>
+                            <td colspan="4" class="empty">
+                                Nenhum cliente encontrado.
+                            </td>
+                        </tr>
+                    `
+                }
+            </table>
+        </div>
+    `;
+
+    $('#q').onchange = e => clients(e.target.value);
+
+    document.querySelectorAll('[data-t]').forEach(b => {
+        b.onclick = async () => {
+            try {
+                await api(
+                    `/clients/${b.dataset.t}/active?active=${b.dataset.a !== 'true'}`,
+                    {method: 'PATCH'}
+                );
+
+                await clients(q);
+            } catch (err) {
+                say(err.message, true);
+            }
+        };
+    });
+
+    $('#f').onsubmit = async e => {
+        e.preventDefault();
+
+        const f = Object.fromEntries(
+            new FormData(e.target)
+        );
+
+        const plan = f.plan_id;
+        delete f.plan_id;
+
+        try {
+            const r = await api('/clients', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(f)
+            });
+
+            if (plan) {
+                await api('/contracts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        client_id: r.id,
+                        plan_id: +plan,
+                        start_date: new Date().toISOString().slice(0,10),
+                        due_day: 10,
+                        months: 12
+                    })
+                });
+            }
+
+            await clients(q);
+            say('Cliente cadastrado com sucesso.');
+
+        } catch (err) {
+            say(err.message, true);
+        }
+    };
+}
+
+/* COBRANÇAS */
+
+async function charges() {
+    const list = await api('/charges');
+
+    $('#view').innerHTML = `
+        <h2>Cobranças</h2>
+
+        <div class="panel">
+            <table>
+
+                <tr>
+                    <th>Cliente</th>
+                    <th>Plano</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+
+                ${
+                    list.map(c => `
+                        <tr>
+                            <td>${esc(c.client)}</td>
+                            <td>${esc(c.plan)}</td>
+                            <td>${dt(c.due_date)}</td>
+                            <td>${brl(c.amount)}</td>
+
+                            <td>
+                                <span class="tag ${c.status}">
+                                    ${label[c.status] || esc(c.status)}
+                                </span>
+                            </td>
+
+                            <td>
+                                ${
+                                    c.status === 'paid'
+                                    || c.status === 'cancelled'
+                                        ? ''
+                                        : `
+                                            <button
+                                                class="btn ghost"
+                                                data-p="${c.id}"
+                                                data-v="${c.amount}"
+                                            >
+                                                Registrar pagamento
+                                            </button>
+                                        `
+                                }
+                            </td>
+                        </tr>
+                    `).join('')
+                    || `
+                        <tr>
+                            <td colspan="6" class="empty">
+                                Nenhuma cobrança encontrada.
+                            </td>
+                        </tr>
+                    `
+                }
+
+            </table>
+        </div>
+    `;
+
+    document.querySelectorAll('[data-p]').forEach(b => {
+        b.onclick = async () => {
+            const tx = prompt(
+                'Informe o ID da transação confirmada. ' +
+                'Sem confirmação, não registre o pagamento.'
+            );
+
+            if (!tx) return;
+
+            try {
+                await api(
+                    `/charges/${b.dataset.p}/payments`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            transaction_id: tx,
+                            method: 'pix',
+                            amount: +b.dataset.v
+                        })
+                    }
+                );
+
+                await charges();
+                say('Pagamento registrado com sucesso.');
+
+            } catch (err) {
+                say(err.message, true);
+            }
+        };
+    });
+}
+
+/* NAVEGAÇÃO */
+
+const views = {
+    dash,
+    clients,
+    charges
+};
+
+document.querySelectorAll('nav button').forEach(b => {
+    b.onclick = () => {
+        document.querySelectorAll('nav button')
+            .forEach(x => x.removeAttribute('aria-current'));
+
+        b.setAttribute('aria-current', 'true');
+
+        say('');
+
+        views[b.dataset.v]()
+            .catch(e => say(e.message, true));
+    };
+});
+
+dash().catch(e => say(e.message, true));
+</script>
+
+</body>
+</html>

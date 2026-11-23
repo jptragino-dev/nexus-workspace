@@ -1,0 +1,22 @@
+
+# Ambiente Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Dados e configurações privadas
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+
+# Arquivos temporários
+.pytest_cache/
+.vscode/
+.DS_Store
+Thumbs.db

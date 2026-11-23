@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: connect
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-connect_dev}
+      POSTGRES_DB: connect
+    volumes: [pgdata:/var/lib/postgresql/data]
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://connect:${DB_PASSWORD:-connect_dev}@db/connect
+    ports: ["8000:8000"]
+    depends_on: [db]
+volumes:
+  pgdata:
